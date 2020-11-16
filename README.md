@@ -7,14 +7,9 @@ This is a bridge for ZoomUS SDK:
 
 Tested on XCode 11.5 and node 12.18.1.
 
-Pull requests are welcome.
-
-- [Example](https://github.com/mieszko4/react-native-zoom-us-test)
-- [Upgrading Guide](https://github.com/mieszko4/react-native-zoom-us/tree/master/docs/UPGRADING.md)
-
 ## Getting started
 
-`$ npm install react-native-zoom-us`
+`$ npm install react-native-zoom`
 
 ### Installation
 
@@ -33,16 +28,16 @@ Make sure you have appropriate description in Info.plist:
 ## Usage
 
 ```typescript
-import ZoomUs from "react-native-zoom-us";
+import Zoom from "react-native-zoom";
 
 // initialize minimal
-await ZoomUs.initialize({
+await Zoom.initialize({
   clientKey: "...",
   clientSecret: "...",
 });
 
 // initialize with extra config
-await ZoomUs.initialize(
+await Zoom.initialize(
   {
     clientKey: "...",
     clientSecret: "...",
@@ -53,8 +48,11 @@ await ZoomUs.initialize(
   }
 );
 
+// get callback event for initialize results
+Zoom.onInitResults(callback: RNZoomInitResultEventCallback)
+
 // Start Meeting
-await ZoomUs.startMeeting({
+await Zoom.startMeeting({
   userName: "Johny",
   meetingNumber: "12345678",
   userId: "our-identifier",
@@ -63,13 +61,13 @@ await ZoomUs.startMeeting({
 });
 
 // Join Meeting
-await ZoomUs.joinMeeting({
+await Zoom.joinMeeting({
   userName: "Johny",
   meetingNumber: "12345678",
 });
 
 // Join Meeting with extra params
-await ZoomUs.joinMeeting({
+await Zoom.joinMeeting({
   userName: "Johny",
   meetingNumber: "12345678",
   password: "1234",
@@ -79,24 +77,30 @@ await ZoomUs.joinMeeting({
 });
 
 // Join Meeting with zoom meeting url
-await ZoomUs.joinMeetingWithWebUrl("<zoom_meeting_url>");
+await Zoom.joinMeetingWithWebUrl("<zoom_meeting_url>");
+
+// Register event callback for join meeting status
+Zoom.addMeetingStatusEventListener(callback: RNZoomMeetingStatusEventCallback);
+
+// Unregister listener
+Zoom.removeMeetingStatusEventListener();
 ```
 
 ## In Meeting Events
 
 ```typescript
-import ZoomUs from "react-native-zoom-us";
+import Zoom from "react-native-zoom-us";
 
 // Get My User Meeting Info
-await ZoomUs.getMyUserMeetingInfo(): Promise<RNZoomMyselfMeetingInfo>
+await Zoom.getMyUserMeetingInfo(): Promise<RNZoomMyselfMeetingInfo>
 
 // Register listener to inMeetingEvents
-ZoomUs.addMeetingEventListener((callback: RNZoomUsEventCallback) => {
+Zoom.addInMeetingEventListener((callback: RNZoomInMeetingEventCallback) => {
   const { event, payload } = callback;
   //...
 });
 // Unregister listener
-ZoomUs.removeMeetingEventListener();
+Zoom.removeInMeetingEventListener();
 ```
 
 ### events could be: [See iOS/Android SDK for more details]
