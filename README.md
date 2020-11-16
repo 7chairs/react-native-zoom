@@ -9,13 +9,13 @@ Tested on XCode 11.5 and node 12.18.1.
 
 ## Getting started
 
-`$ npm install react-native-zoom`
+`$ npm i @7chairs/react-native-zoom`
 
 ### Installation
 
 Library will be linked automatically.
 
-If you have `react-native < 0.60`, check [Linking Guide](https://github.com/mieszko4/react-native-zoom/tree/master/docs/LINKING.md)
+If you have `react-native < 0.60`, check [Linking Guide](https://github.com/7chairs/react-native-zoom/blob/master/docs/LINKING.md)
 
 #### iOS
 
