@@ -15,7 +15,7 @@ Tested on XCode 11.5 and node 12.18.1.
 
 Library will be linked automatically.
 
-If you have `react-native < 0.60`, check [Linking Guide](https://github.com/mieszko4/react-native-zoom-us/tree/master/docs/LINKING.md)
+If you have `react-native < 0.60`, check [Linking Guide](https://github.com/mieszko4/react-native-zoom/tree/master/docs/LINKING.md)
 
 #### iOS
 
@@ -89,7 +89,7 @@ Zoom.removeMeetingStatusEventListener();
 ## In Meeting Events
 
 ```typescript
-import Zoom from "react-native-zoom-us";
+import Zoom from "react-native-zoom";
 
 // Get My User Meeting Info
 await Zoom.getMyUserMeetingInfo(): Promise<RNZoomMyselfMeetingInfo>
