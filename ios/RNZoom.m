@@ -288,58 +288,38 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
     }];
 }
 
-- (void)onAudioOutputChange {
-    <#code#>
-}
+- (void)onAudioOutputChange {}
 
 
-- (void)onMyAudioStateChange {
-    <#code#>
-}
+- (void)onMyAudioStateChange {}
 
 
-- (void)onSinkMeetingAudioRequestUnmuteByHost {
-    <#code#>
-}
+- (void)onSinkMeetingAudioRequestUnmuteByHost {}
 
 
-- (void)onSinkMeetingMyAudioTypeChange {
-    <#code#>
-}
+- (void)onSinkMeetingMyAudioTypeChange {}
 
 
 - (void)onSinkMeetingActiveVideoForDeck:(NSUInteger)userID {
     [self notifyInMeetingEvent:@"meeting.user.video.speaker" params:[self getUSerInfoByUserId:userID]];
 }
 
-- (void)onMyVideoStateChange {
-    <#code#>
-}
+- (void)onMyVideoStateChange {}
 
 
-- (void)onSinkMeetingPreviewStopped {
-    <#code#>
-}
+- (void)onSinkMeetingPreviewStopped {}
 
 
-- (void)onSinkMeetingShowMinimizeMeetingOrBackZoomUI:(MobileRTCMinimizeMeetingState)state {
-    <#code#>
-}
+- (void)onSinkMeetingShowMinimizeMeetingOrBackZoomUI:(MobileRTCMinimizeMeetingState)state {}
 
 
-- (void)onSinkMeetingVideoQualityChanged:(MobileRTCNetworkQuality)qality userID:(NSUInteger)userID {
-    <#code#>
-}
+- (void)onSinkMeetingVideoQualityChanged:(MobileRTCNetworkQuality)qality userID:(NSUInteger)userID {}
 
 
-- (void)onSinkMeetingVideoRequestUnmuteByHost:(void (^ _Nonnull)(BOOL))completion {
-    <#code#>
-}
+- (void)onSinkMeetingVideoRequestUnmuteByHost:(void (^ _Nonnull)(BOOL))completion {}
 
 
-- (void)onSpotlightVideoChange:(BOOL)on {
-    <#code#>
-}
+- (void)onSpotlightVideoChange:(BOOL)on {}
 
 
 - (void)onSinkMeetingUserJoin:(NSUInteger)userID {
@@ -350,44 +330,28 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
     [self notifyInMeetingEvent:@"meeting.user.left" params:[self getUSerInfoByUserId:userID]];
 }
 
-- (void)onClaimHostResult:(MobileRTCClaimHostError)error {
-    <#code#>
-}
+- (void)onClaimHostResult:(MobileRTCClaimHostError)error {}
 
 
-- (void)onInMeetingUserUpdated {
-    <#code#>
-}
+- (void)onInMeetingUserUpdated {}
 
 
-- (void)onMeetingCoHostChange:(NSUInteger)cohostId {
-    <#code#>
-}
+- (void)onMeetingCoHostChange:(NSUInteger)cohostId {}
 
 
-- (void)onMeetingHostChange:(NSUInteger)hostId {
-    <#code#>
-}
+- (void)onMeetingHostChange:(NSUInteger)hostId {}
 
 
-- (void)onMyHandStateChange {
-    <#code#>
-}
+- (void)onMyHandStateChange {}
 
 
-- (void)onSinkMeetingUserLowerHand:(NSUInteger)userID {
-    <#code#>
-}
+- (void)onSinkMeetingUserLowerHand:(NSUInteger)userID {}
 
 
-- (void)onSinkMeetingUserRaiseHand:(NSUInteger)userID {
-    <#code#>
-}
+- (void)onSinkMeetingUserRaiseHand:(NSUInteger)userID {}
 
 
-- (void)onSinkUserNameChanged:(NSUInteger)userID userName:(NSString * _Nonnull)userName {
-    <#code#>
-}
+- (void)onSinkUserNameChanged:(NSUInteger)userID userName:(NSString * _Nonnull)userName {}
 
 
 @end
