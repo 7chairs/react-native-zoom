@@ -1,5 +1,5 @@
 
-#import "RNZoomUs.h"
+#import "RNZoom.h"
 
 @implementation RNZoom
 

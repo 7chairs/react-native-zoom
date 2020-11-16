@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		35B9664A2139997D009ECAC1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B966492139997D009ECAC1 /* CoreBluetooth.framework */; };
 		35B9664C2139998B009ECAC1 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B9664B2139998B009ECAC1 /* VideoToolbox.framework */; };
-		B3E7B58A1CC2AC0600A0062D /* RNZoomUs.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNZoomUs.m */; };
+		B3E7B58A1CC2AC0600A0062D /* RNZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNZoom.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,13 +25,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		134814201AA4EA6300B7C361 /* libRNZoomUs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNZoomUs.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		134814201AA4EA6300B7C361 /* libRNZoom.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNZoom.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		35B96644213998A6009ECAC1 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileRTC.framework; path = libs/MobileRTC.framework; sourceTree = SOURCE_ROOT; };
 		35B96647213998D0009ECAC1 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = libs/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		35B966492139997D009ECAC1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		35B9664B2139998B009ECAC1 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
-		B3E7B5881CC2AC0600A0062D /* RNZoomUs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNZoomUs.h; sourceTree = "<group>"; };
-		B3E7B5891CC2AC0600A0062D /* RNZoomUs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNZoomUs.m; sourceTree = "<group>"; };
+		B3E7B5881CC2AC0600A0062D /* RNZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNZoom.h; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* RNZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNZoom.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +50,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libRNZoomUs.a */,
+				134814201AA4EA6300B7C361 /* libRNZoom.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,8 +69,8 @@
 			isa = PBXGroup;
 			children = (
 				35B96647213998D0009ECAC1 /* MobileRTCResources.bundle */,
-				B3E7B5881CC2AC0600A0062D /* RNZoomUs.h */,
-				B3E7B5891CC2AC0600A0062D /* RNZoomUs.m */,
+				B3E7B5881CC2AC0600A0062D /* RNZoom.h */,
+				B3E7B5891CC2AC0600A0062D /* RNZoom.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				35B96643213998A4009ECAC1 /* Frameworks */,
 			);
@@ -79,9 +79,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* RNZoomUs */ = {
+		58B511DA1A9E6C8500147676 /* RNZoom */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNZoomUs" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNZoom" */;
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
@@ -92,9 +92,9 @@
 			);
 			dependencies = (
 			);
-			name = RNZoomUs;
+			name = RNZoom;
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libRNZoomUs.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libRNZoom.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -111,7 +111,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNZoomUs" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNZoom" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -124,7 +124,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* RNZoomUs */,
+				58B511DA1A9E6C8500147676 /* RNZoom */,
 			);
 		};
 /* End PBXProject section */
@@ -144,7 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E7B58A1CC2AC0600A0062D /* RNZoomUs.m in Sources */,
+				B3E7B58A1CC2AC0600A0062D /* RNZoom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,7 +250,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNZoomUs;
+				PRODUCT_NAME = RNZoom;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -273,7 +273,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNZoomUs;
+				PRODUCT_NAME = RNZoom;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -281,7 +281,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNZoomUs" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNZoom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -290,7 +290,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNZoomUs" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNZoom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,

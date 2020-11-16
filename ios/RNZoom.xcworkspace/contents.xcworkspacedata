@@ -3,7 +3,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:RNZoomUs.xcodeproj">
+      location = "group:RNZoom.xcodeproj">
    </FileRef>
 </Workspace>
   
