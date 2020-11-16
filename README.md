@@ -1,4 +1,4 @@
-# react-native-zoom-us
+# react-native-zoom
 
 This is a bridge for ZoomUS SDK:
 
