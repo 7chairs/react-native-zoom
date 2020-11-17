@@ -54,6 +54,8 @@ public class RNZoomModule extends ReactContextBaseJavaModule implements ZoomSDKI
         @Override
         public void run() {
           ZoomSDK zoomSDK = ZoomSDK.getInstance();
+          WritableMap map = Arguments.createMap();
+          map.putBoolean("initialized", zoomSDK.isInitialized());
           if (!zoomSDK.isInitialized()) {
             ZoomSDKInitParams initParams = new ZoomSDKInitParams();
             initParams.appKey = params.getString("clientKey");
@@ -61,7 +63,7 @@ public class RNZoomModule extends ReactContextBaseJavaModule implements ZoomSDKI
             initParams.domain = params.getString("domain");
             zoomSDK.initialize(getReactApplicationContext(), RNZoomModule.this, initParams);
           }
-          promise.resolve(null);
+          promise.resolve(map);
         }
       });
     } catch (Exception ex) {

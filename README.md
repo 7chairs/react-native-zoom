@@ -28,7 +28,7 @@ Make sure you have appropriate description in Info.plist:
 ## Usage
 
 ```typescript
-import Zoom from "react-native-zoom";
+import Zoom from "@7chairs/react-native-zoom";
 
 // initialize minimal
 await Zoom.initialize({
@@ -37,7 +37,7 @@ await Zoom.initialize({
 });
 
 // initialize with extra config
-await Zoom.initialize(
+const { initialized } = await Zoom.initialize(
   {
     clientKey: "...",
     clientSecret: "...",
@@ -48,7 +48,7 @@ await Zoom.initialize(
   }
 );
 
-// get callback event for initialize results
+// if (!initialized) get callback event for initialize results
 Zoom.onInitResults(callback: RNZoomInitResultEventCallback)
 
 // Start Meeting
@@ -89,7 +89,7 @@ Zoom.removeMeetingStatusEventListener();
 ## In Meeting Events
 
 ```typescript
-import Zoom from "react-native-zoom";
+import Zoom from "@7chairs/react-native-zoom";
 
 // Get My User Meeting Info
 await Zoom.getMyUserMeetingInfo(): Promise<RNZoomMyselfMeetingInfo>

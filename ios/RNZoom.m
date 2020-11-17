@@ -36,8 +36,11 @@ RCT_REMAP_METHOD(
       context.enableLog = YES;
       context.locale = MobileRTC_ZoomLocale_Default;
       
+      NSDictionary *res = @{
+          @"initialized": [NSNumber numberWithBool:[[MobileRTC sharedRTC] isRTCAuthorized]]
+      };
       if ([[MobileRTC sharedRTC] isRTCAuthorized]) {
-          resolve(@"Already initialize Zoom SDK successfully.");
+          resolve(res);
           return;
       }
 
@@ -54,7 +57,7 @@ RCT_REMAP_METHOD(
           authService.clientKey = data[@"clientKey"];
           authService.clientSecret = data[@"clientSecret"];
           [authService sdkAuth];
-          resolve(nil);
+          resolve(res);
       } else {
           NSLog(@"onZoomSDKInitializeResult, no authService");
           reject(@"onZoomSDKInitializeResult", @"no authService", nil);
@@ -164,10 +167,11 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
       if (!ms) {
           return reject(@"ERR_MEETING_SERVICE", @"could not approach zoom meeting", nil);
       }
-      
+            
       MobileRTCMeetingState meetingState = ms.getMeetingState;
       if (meetingState == MobileRTCMeetingState_InMeeting) {
-          return resolve([self getUSerInfoByUserId:[ms myselfUserID]]);
+          NSMutableDictionary *dict = [self getUSerInfoByUserId:[ms myselfUserID]];
+          return resolve(dict);
       }
       
       reject(@"ERR_MEETING_SERVICE", @"user has not joined meeting", nil);
@@ -252,14 +256,13 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
     [self sendEventWithName:@"InMeetingEvent" body:body];
 }
 
-- (NSDictionary *)getUSerInfoByUserId:(NSUInteger)userID {
+- (NSMutableDictionary *)getUSerInfoByUserId:(NSUInteger)userID {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
     MobileRTCMeetingUserInfo *userInfo = [ms userInfoByID:userID];
-    return @{
-        @"userId": [NSString stringWithFormat:@"%li",  userID],
-        @"name": userInfo.userName
-        // @"participantId": userInfo.participantID
-    };
+    [dict setObject:[NSString stringWithFormat:@"%li",  userID] forKey:@"userId"];
+    [dict setObject:userInfo.userName forKey:@"name"];
+    return dict;
 }
 
 - (void)onSinkMeetingActiveVideo:(NSUInteger)userID {

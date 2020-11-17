@@ -7,7 +7,7 @@ import {
 
 const { RNZoom } = NativeModules;
 
-import * as Types from "./types"
+import * as Types from "./types";
 
 if (!RNZoom) console.error("RNZoom native module is not linked.");
 
@@ -23,7 +23,7 @@ async function initialize(
   } = {
     disableShowVideoPreviewWhenJoinMeeting: true,
   }
-) {
+): Promise<{ initialized: boolean }> {
   if (!params.domain) params.domain = "zoom.us";
 
   return RNZoom.initialize(params, settings);
@@ -73,51 +73,63 @@ function onInitResults(callback: Types.RNZoomInitResultEventCallback) {
     return;
   }
   const listener =
-    Platform.OS === "ios"
-      ? new NativeEventEmitter(RNZoom)
-      : DeviceEventEmitter;
-      
-  subscriptions[Types.RNZoomSubscriptionEvents.INITIALIZE_RESULT_EVENT] = listener.addListener(
+    Platform.OS === "ios" ? new NativeEventEmitter(RNZoom) : DeviceEventEmitter;
+
+  subscriptions[
+    Types.RNZoomSubscriptionEvents.INITIALIZE_RESULT_EVENT
+  ] = listener.addListener(
     Types.RNZoomSubscriptionEvents.INITIALIZE_RESULT_EVENT,
     callback
   );
 }
 
-function addMeetingStatusEventListener(callback: Types.RNZoomMeetingStatusEventCallback) {
-  if (subscriptions[Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT]) {
+function addMeetingStatusEventListener(
+  callback: Types.RNZoomMeetingStatusEventCallback
+) {
+  if (
+    subscriptions[Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT]
+  ) {
     console.log("Zoom already has subscription meeting status event");
     return;
   }
   const listener =
-    Platform.OS === "ios"
-      ? new NativeEventEmitter(RNZoom)
-      : DeviceEventEmitter;
+    Platform.OS === "ios" ? new NativeEventEmitter(RNZoom) : DeviceEventEmitter;
 
-  subscriptions[Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT] = listener.addListener(
+  subscriptions[
+    Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT
+  ] = listener.addListener(
     Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT,
     callback
   );
 }
 function removeMeetingStatusEventListener() {
-  if (!subscriptions[Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT]) {
+  if (
+    !subscriptions[Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT]
+  ) {
     return;
   }
 
-  subscriptions[Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT].remove();
-  delete subscriptions[Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT];
+  subscriptions[
+    Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT
+  ].remove();
+  delete subscriptions[
+    Types.RNZoomSubscriptionEvents.MEETING_STATUS_CHANGE_EVENT
+  ];
 }
 
-function addInMeetingEventListener(callback: Types.RNZoomInMeetingEventCallback) {
+function addInMeetingEventListener(
+  callback: Types.RNZoomInMeetingEventCallback
+) {
   if (subscriptions[Types.RNZoomSubscriptionEvents.IN_MEETING_EVENT]) {
     console.log("Zoom already has subscription in meeting event");
     return;
   }
   const listener =
-    Platform.OS === "ios"
-      ? new NativeEventEmitter(RNZoom)
-      : DeviceEventEmitter;
+    Platform.OS === "ios" ? new NativeEventEmitter(RNZoom) : DeviceEventEmitter;
 
-  subscriptions[Types.RNZoomSubscriptionEvents.IN_MEETING_EVENT] = listener.addListener(
+  subscriptions[
+    Types.RNZoomSubscriptionEvents.IN_MEETING_EVENT
+  ] = listener.addListener(
     Types.RNZoomSubscriptionEvents.IN_MEETING_EVENT,
     callback
   );
