@@ -33,7 +33,8 @@ android {
 
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.aar"])
+    implementation project(':commonlib')
+    implementation project(':mobilertc')
     implementation 'com.facebook.react:react-native:+' // From node_modules
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'

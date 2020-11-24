@@ -17,6 +17,23 @@ Library will be linked automatically.
 
 If you have `react-native < 0.60`, check [Linking Guide](https://github.com/7chairs/react-native-zoom/blob/master/docs/LINKING.md)
 
+#### android
+
+Since we use zoom sdk from local './libs' folder android release apk could not be packed. Therefore you will need to do this following steps:
+
+1. in android studio go to: File -> New -> New Module -> Import .JAR/.AAR Package
+
+2. import both mobilertc.aar and commonlib.aar. after doind so you should have in your android root directory both 'mobilertc' and 'commonlib' folders
+
+3. add to settings.gradle
+
+```
+include ':mobilertc'
+include ':commonlib'
+project(':mobilertc').projectDir = file("./mobilertc")
+project(':commonlib').projectDir = file("./commonlib")
+```
+
 #### iOS
 
 Make sure you have appropriate description in Info.plist:
