@@ -261,7 +261,9 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
     MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
     MobileRTCMeetingUserInfo *userInfo = [ms userInfoByID:userID];
     [dict setObject:[NSString stringWithFormat:@"%li",  userID] forKey:@"userId"];
-    [dict setObject:userInfo.userName forKey:@"name"];
+    if (userInfo.userName != nil) {
+        [dict setObject:userInfo.userName forKey:@"name"];
+    }
     return dict;
 }
 
