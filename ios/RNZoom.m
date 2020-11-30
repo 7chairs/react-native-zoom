@@ -110,17 +110,28 @@ RCT_REMAP_METHOD(
           MobileRTCMeetingJoinParam * joinParam = [[MobileRTCMeetingJoinParam alloc]init];
           joinParam.userName = data[@"userName"];
           joinParam.password =  data[@"password"];
-          joinParam.participantID = data[@"participantID"];
           joinParam.zak = data[@"zoomAccessToken"];
-          joinParam.webinarToken =  data[@"webinarToken"];
-          joinParam.noAudio = data[@"noAudio"];
-          joinParam.noVideo = data[@"noVideo"];
-            
             if (data[@"vanityID"]) {
                 joinParam.vanityID = data[@"vanityID"];
             } else {
                 joinParam.meetingNumber = data[@"meetingNumber"];
             }
+            
+            if (data[@"participantID"]) {
+                joinParam.participantID = data[@"participantID"];
+            }
+            if (data[@"webinarToken"]) {
+                joinParam.webinarToken =  data[@"webinarToken"];
+            }
+            if (data[@"noAudio"]) {
+                joinParam.noAudio = data[@"noAudio"];
+            }
+            if (data[@"noVideo"]) {
+                joinParam.noVideo = data[@"noVideo"];
+            }
+          
+            
+
 
             MobileRTCMeetError joinMeetingResult = [ms joinMeetingWithJoinParam:joinParam];
             NSLog(@"joinMeeting, joinMeetingResult=%d", joinMeetingResult);
@@ -219,7 +230,7 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
 - (void)onMeetingStateChange:(MobileRTCMeetingState)state {
     NSLog(@"onMeetingStatusChanged, meetingState=%d", state);
     
-    BOOL success = state == MobileRTCMeetingState_InMeeting;
+    BOOL success = state == MobileRTCMeetingState_InMeeting || state == MobileRTCMeetingState_Idle;
     int errorCode = success ? 0 : 1;
     
     NSDictionary *body = @{
