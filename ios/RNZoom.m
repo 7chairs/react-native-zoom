@@ -131,8 +131,6 @@ RCT_REMAP_METHOD(
             }
           
             
-
-
             MobileRTCMeetError joinMeetingResult = [ms joinMeetingWithJoinParam:joinParam];
             NSLog(@"joinMeeting, joinMeetingResult=%d", joinMeetingResult);
             resolve(nil);
@@ -181,7 +179,7 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
             
       MobileRTCMeetingState meetingState = ms.getMeetingState;
       if (meetingState == MobileRTCMeetingState_InMeeting) {
-          NSMutableDictionary *dict = [self getUSerInfoByUserId:[ms myselfUserID]];
+          NSMutableDictionary *dict = [self getUserInfoByUserId:[ms myselfUserID]];
           return resolve(dict);
       }
       
@@ -214,27 +212,33 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
 
 - (void)onMeetingReturn:(MobileRTCMeetError)errorCode internalError:(NSInteger)internalErrorCode {
     NSLog(@"onMeetingReturn, error=%d, internalErrorCode=%zd", errorCode, internalErrorCode);
-
-    BOOL success = errorCode == MobileRTCMeetError_Success;
-    
-    NSDictionary *body = @{
-        @"inMeeting": [NSNumber numberWithBool:success],
-        @"payload": @{
-                @"meetingStatus": [NSString stringWithFormat:@"%u", errorCode],
-                @"errorCode": [NSNumber numberWithInt:errorCode]
-        }
-    };
-    [self sendEventWithName:@"MeetingStatusChangedEvent" body:body];
 }
 
 - (void)onMeetingStateChange:(MobileRTCMeetingState)state {
     NSLog(@"onMeetingStatusChanged, meetingState=%d", state);
     
-    BOOL success = state == MobileRTCMeetingState_InMeeting || state == MobileRTCMeetingState_Idle;
+    BOOL success = state == MobileRTCMeetingState_InMeeting;
     int errorCode = success ? 0 : 1;
+    
+    NSString *status;
+    switch (state) {
+        case MobileRTCMeetingState_Idle:
+            status = @"left";
+            break;
+        case MobileRTCMeetingState_Connecting:
+            status = @"connecting";
+            break;
+        case MobileRTCMeetingState_InMeeting:
+            status = @"joined";
+            break;
+        default:
+            status = @"other";
+            break;
+    }
     
     NSDictionary *body = @{
         @"inMeeting": [NSNumber numberWithBool:success],
+        @"status": status,
         @"payload": @{
                 @"meetingStatus": [NSString stringWithFormat:@"%u", state],
                 @"errorCode": [NSNumber numberWithInt:errorCode]
@@ -245,17 +249,6 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
 
 - (void)onMeetingError:(MobileRTCMeetError)errorCode message:(NSString *)message {
     NSLog(@"onMeetingError, errorCode=%d, message=%@", errorCode, message);
-    
-    BOOL success = errorCode == 0;
-    
-    NSDictionary *body = @{
-        @"inMeeting": [NSNumber numberWithBool:success],
-        @"payload": @{
-                @"meetingStatus": message,
-                @"errorCode": [NSNumber numberWithInt:errorCode]
-        }
-    };
-    [self sendEventWithName:@"MeetingStatusChangedEvent" body:body];
 }
 
 
@@ -267,7 +260,7 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
     [self sendEventWithName:@"InMeetingEvent" body:body];
 }
 
-- (NSMutableDictionary *)getUSerInfoByUserId:(NSUInteger)userID {
+- (NSMutableDictionary *)getUserInfoByUserId:(NSUInteger)userID {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
     MobileRTCMeetingUserInfo *userInfo = [ms userInfoByID:userID];
@@ -279,7 +272,7 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
 }
 
 - (void)onSinkMeetingActiveVideo:(NSUInteger)userID {
-    [self notifyInMeetingEvent:@"meeting.user.video.active" params:[self getUSerInfoByUserId:userID]];
+    [self notifyInMeetingEvent:@"meeting.user.video.active" params:[self getUserInfoByUserId:userID]];
 }
 
 - (void)onSinkMeetingVideoStatusChange:(NSUInteger)userID {
@@ -317,7 +310,7 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
 
 
 - (void)onSinkMeetingActiveVideoForDeck:(NSUInteger)userID {
-    [self notifyInMeetingEvent:@"meeting.user.video.speaker" params:[self getUSerInfoByUserId:userID]];
+    [self notifyInMeetingEvent:@"meeting.user.video.speaker" params:[self getUserInfoByUserId:userID]];
 }
 
 - (void)onMyVideoStateChange {}
@@ -339,11 +332,11 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
 
 
 - (void)onSinkMeetingUserJoin:(NSUInteger)userID {
-    [self notifyInMeetingEvent:@"meeting.user.joined" params:[self getUSerInfoByUserId:userID]];
+    [self notifyInMeetingEvent:@"meeting.user.joined" params:[self getUserInfoByUserId:userID]];
 }
 
 - (void)onSinkMeetingUserLeft:(NSUInteger)userID {
-    [self notifyInMeetingEvent:@"meeting.user.left" params:[self getUSerInfoByUserId:userID]];
+    [self notifyInMeetingEvent:@"meeting.user.left" params:[self getUserInfoByUserId:userID]];
 }
 
 - (void)onClaimHostResult:(MobileRTCClaimHostError)error {}

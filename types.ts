@@ -1,7 +1,7 @@
 export enum RNZoomSubscriptionEvents {
   INITIALIZE_RESULT_EVENT = "InitializeResultEvent",
   MEETING_STATUS_CHANGE_EVENT = "MeetingStatusChangedEvent",
-  IN_MEETING_EVENT = "InMeetingEvent"
+  IN_MEETING_EVENT = "InMeetingEvent",
 }
 
 export interface RNZoomInitializeParams {
@@ -37,6 +37,16 @@ export interface RNZoomMyselfMeetingInfo {
   userId: string;
 }
 
-export type RNZoomInitResultEventCallback = ({ success: boolean, errorCode: number }) => void;
-export type RNZoomMeetingStatusEventCallback = ({ inMeeting: boolean, payload: { meetingStatus: string, errorCode: number } }) => void;
-export type RNZoomInMeetingEventCallback = ({ event: string, payload: any }) => void; 
+export type RNZoomInitResultEventCallback = ({
+  success: boolean,
+  errorCode: number,
+}) => void;
+export type RNZoomMeetingStatusEventCallback = ({
+  inMeeting: boolean,
+  status: string,
+  payload: { meetingStatus: string, errorCode: number },
+}) => void;
+export type RNZoomInMeetingEventCallback = ({
+  event: string,
+  payload: any,
+}) => void;

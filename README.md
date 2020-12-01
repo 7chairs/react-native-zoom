@@ -79,16 +79,17 @@ await Zoom.startMeeting({
 
 // Join Meeting
 await Zoom.joinMeeting({
-  userName: "Johny",
+  userName: "Joh",
   meetingNumber: "12345678",
 });
 
 // Join Meeting with extra params
 await Zoom.joinMeeting({
-  userName: "Johny",
+  userName: "Joh",
   meetingNumber: "12345678",
   password: "1234",
   participantID: "our-unique-id",
+  zoomAccessToken: "token",
   noAudio: true,
   noVideo: true,
 });

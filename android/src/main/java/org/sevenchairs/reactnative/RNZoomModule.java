@@ -254,8 +254,26 @@ public class RNZoomModule extends ReactContextBaseJavaModule implements ZoomSDKI
   public void onMeetingStatusChanged(MeetingStatus meetingStatus, int errorCode, int internalErrorCode) {
     Log.i(TAG, "onMeetingStatusChanged, meetingStatus=" + meetingStatus + ", errorCode=" + errorCode + ", internalErrorCode=" + internalErrorCode);
 
+    String status;
+    switch (meetingStatus) {
+      case MEETING_STATUS_IDLE:
+      case MEETING_STATUS_DISCONNECTING:
+        status = "left";
+        break;
+      case MEETING_STATUS_CONNECTING:
+        status = "connecting";
+        break;
+      case MEETING_STATUS_INMEETING:
+        status = "joined";
+        break;
+      default:
+        status = "other";
+        break;
+    }
+
     WritableMap map = Arguments.createMap();
     map.putBoolean("inMeeting", meetingStatus == MeetingStatus.MEETING_STATUS_INMEETING);
+    map.putString("status", status);
 
     WritableMap zoomPayload = Arguments.createMap();
     zoomPayload.putString("meetingStatus", meetingStatus.name());
