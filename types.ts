@@ -38,15 +38,22 @@ export interface RNZoomMyselfMeetingInfo {
 }
 
 export type RNZoomInitResultEventCallback = ({
-  success: boolean,
-  errorCode: number,
+  success,
+  errorCode,
+}: {
+  success: boolean;
+  errorCode: number;
 }) => void;
 export type RNZoomMeetingStatusEventCallback = ({
-  inMeeting: boolean,
-  status: string,
-  payload: { meetingStatus: string, errorCode: number },
+  inMeeting,
+  status,
+  payload,
+}: {
+  inMeeting: boolean;
+  status: string;
+  payload: { meetingStatus: string; errorCode: number };
 }) => void;
-export type RNZoomInMeetingEventCallback = ({
-  event: string,
-  payload: any,
-}) => void;
+export type RNZoomInMeetingEventCallback = (
+  { event, payload },
+  { event: string, payload: any }
+) => void;
