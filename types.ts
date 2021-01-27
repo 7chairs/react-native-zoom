@@ -33,7 +33,7 @@ export interface RNZoomStartMeetingParams {
 }
 
 export interface RNZoomMyselfMeetingInfo {
-  name: string;
+  name?: string;
   userId: string;
 }
 
