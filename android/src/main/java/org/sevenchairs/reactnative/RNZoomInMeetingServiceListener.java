@@ -35,9 +35,11 @@ public class RNZoomInMeetingServiceListener implements InMeetingServiceListener 
     }
 
     private WritableMap extractUserInfoFromUserId(long userId) {
-        InMeetingUserInfo userInfo = inMeetingService.getUserInfoById(userId);
         WritableMap map = Arguments.createMap();
-        map.putString("name", userInfo.getUserName());
+        InMeetingUserInfo userInfo = inMeetingService.getUserInfoById(userId);
+        if (userInfo != null) {
+            map.putString("name", userInfo.getUserName());
+        }
         map.putString("userId", "" + userId);
         // map.putString("participantId", userInfo.getParticipantID());
         return map;
