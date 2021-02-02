@@ -279,22 +279,30 @@ RCT_REMAP_METHOD(getMyUserMeetingInfo,
     MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
     MobileRTCMeetingUserInfo *userInfo = [ms userInfoByID:userID];
     BOOL active = [[userInfo videoStatus] isSending];
-    [self notifyInMeetingEvent:@"meeting.user.video.status" params:@{
-        @"userId": [NSString stringWithFormat:@"%li",  userID],
-        @"name": userInfo.userName,
-        @"active": [NSNumber numberWithBool:active]
-    }];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:[NSString stringWithFormat:@"%li",  userID] forKey:@"userId"];
+    [params setObject:[NSNumber numberWithBool:active] forKey:@"active"];
+    if (userInfo.userName != nil) {
+        [params setObject:userInfo.userName forKey:@"name"];
+    }
+    
+    [self notifyInMeetingEvent:@"meeting.user.video.status" params:params];
 }
 
 - (void)onSinkMeetingAudioStatusChange:(NSUInteger)userID {
     MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
     MobileRTCMeetingUserInfo *userInfo = [ms userInfoByID:userID];
     BOOL muted = [[userInfo audioStatus] isMuted];
-    [self notifyInMeetingEvent:@"meeting.user.audio.status" params:@{
-        @"userId": [NSString stringWithFormat:@"%li",  userID],
-        @"name": userInfo.userName,
-        @"muted": [NSNumber numberWithBool:muted]
-    }];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:[NSString stringWithFormat:@"%li",  userID] forKey:@"userId"];
+    [params setObject:[NSNumber numberWithBool:muted] forKey:@"muted"];
+    if (userInfo.userName != nil) {
+        [params setObject:userInfo.userName forKey:@"name"];
+    }
+    
+    [self notifyInMeetingEvent:@"meeting.user.audio.status" params:params];
 }
 
 - (void)onAudioOutputChange {}
