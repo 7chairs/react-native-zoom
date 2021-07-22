@@ -153,6 +153,10 @@ RCT_REMAP_METHOD(
     MobileRTCMeetingService *ms = [[MobileRTC sharedRTC] getMeetingService];
     if (ms) {
         ms.delegate = self;
+        
+        UINavigationController *navigationController = [UIApplication sharedApplication].keyWindow.rootViewController.navigationController;
+        [[MobileRTC sharedRTC] setMobileRTCRootController:navigationController];
+        [[[MobileRTC sharedRTC] getMeetingSettings] disableShowVideoPreviewWhenJoinMeeting:YES];
 
         MobileRTCMeetError joinMeetingResult = [ms handZoomWebUrl:url];
         NSLog(@"joinMeetingWithWebUrl, joinMeetingResult=%d", joinMeetingResult);
