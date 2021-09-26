@@ -53,7 +53,10 @@ export type RNZoomMeetingStatusEventCallback = ({
   status: string;
   payload: { meetingStatus: string; errorCode: number };
 }) => void;
-export type RNZoomInMeetingEventCallback = (
-  { event, payload },
-  { event: string, payload: any }
-) => void;
+export type RNZoomInMeetingEventCallback = ({
+  event,
+  payload,
+}: {
+  event: string;
+  payload: any;
+}) => void;
